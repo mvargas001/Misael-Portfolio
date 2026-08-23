@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Decurion — Misael Vargas</title>
+<meta name="description" content="Decurion: multi-drone teaming system — problem, approach, proof-of-concept recordings, engineering log, and photos.">
+<script>
+  // Set theme before first paint to avoid a flash of the wrong theme.
+  (function () {
+    var saved = null;
+    try { saved = localStorage.getItem("theme"); } catch (e) {}
+    var theme = saved || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    document.documentElement.setAttribute("data-theme", theme);
+  })();
+</script>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<!-- ============================================================
+     THIS FILE IS THE TEMPLATE.
+     To add a new project: duplicate this file into projects/your-slug.html,
+     then work top to bottom replacing the placeholder content in each
+     section. Keep the section order and class names as-is so every
+     project page looks consistent. Then add a matching card to the
+     PROJECTS array in js/data.js so it shows up on the landing page.
+     ============================================================ -->
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="../index.html" class="brand"><span class="dot">&#9679;</span> Personal Portfolio</a>
+    <button class="theme-toggle" data-theme-toggle aria-label="Toggle dark mode">
+      <span class="icon-sun">&#9728;</span><span class="icon-moon">&#9789;</span>
+    </button>
+  </div>
+</nav>
+
+<!-- ---------- Project title block ---------- -->
+<div class="project-header">
+  <div class="wrap">
+    <a href="../index.html" class="back-link">&larr; All projects</a>
+    <h1>Decurion</h1>
+    <p class="subtitle">A solo student build exploring how one operator can command multiple autonomous UAVs — bridging human control and machine autonomy.</p>
+    <div class="tags">
+      <span class="tag">SolidWorks</span>
+      <span class="tag">FEA</span>
+      <span class="tag">3D Printing</span>
+      <span class="tag">Python</span>
+      <span class="tag">Control Systems</span>
+    </div>
+  </div>
+</div>
+
+<!-- ---------- Sticky in-page jump nav — keep the 7 links + ids in sync with the sections below ---------- -->
+<nav class="section-nav">
+  <div class="wrap">
+    <a href="#overview">Overview</a>
+    <a href="#problem">The Problem</a>
+    <a href="#approach">Approach</a>
+    <a href="#poc">Proof of Concept</a>
+    <a href="#log">Engineering Log</a>
+    <a href="#skills">Skills &amp; Tags</a>
+    <a href="#gallery">Photo Gallery</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <!-- ============================================================
+       1. OVERVIEW — what it is, a few sentences, with a hero image
+       ============================================================ -->
+  <section class="project-section" id="overview">
+    <div class="section-label">01 · Overview</div>
+    <h2>Overview</h2>
+    <div class="hero-image">
+      <img src="../assets/projects/drone/DSC01422.JPG" alt="Quadcopter frame render">
+    </div>
+    <p>
+      Decurion is a manned-unmanned teaming system in active development. The simulation side, built in ArduPilot SITL and running through Mission Planner, is largely working: I can currently command two drones by voice in simulation. The physical build is underway, with the first and second drone nearing completion.
+
+    </p>
+    <p>
+      Both drones can be pictured above. 
+    </p>
+  </section>
+
+  <!-- ============================================================
+       2. THE PROBLEM / THESIS — the real problem and why it matters
+       ============================================================ -->
+  <section class="project-section" id="problem">
+    <div class="section-label">02 · The Problem</div>
+    <h2>The Problem / Thesis</h2>
+    <p>
+      Modern drone operations are bottlenecked by a 1:1 ratio — one operator, one vehicle. As defense and commercial applications move toward multi-asset missions, that ratio doesn't scale. The real bottleneck isn't the drones; it's command and coordination.
+    </p>
+    <p>
+      Decurion is a coordination system for multiple drones, built around a ground station that tracks every vehicle, relays position and state between them, and lets one person direct the whole team instead of babysitting each drone individually. Voice is the interface — it's how commands get in — but the real work is underneath: routing commands to the right vehicle, keeping followers in sync with their leader, and giving one operator a coherent picture of a multi-drone mission instead of a wall of individual controls.
+    </p>
+  </section>
+
+  <!-- ============================================================
+       3. APPROACH — how it was designed and built
+       ============================================================ -->
+  <section class="project-section" id="approach">
+    <div class="section-label">03 · Approach</div>
+    <h2>Approach</h2>
+    <p>
+      I started from the single-drone command toolkit — connect, arm, takeoff, land — so every later layer could build on it without a rewrite, and worked through three iterations:
+    </p>
+    <ol>
+      <li><strong>Baseline</strong> — At its core, this system organizes and commands drones. We start with a simplified version of that: two drones, working as a coordinated pair.</li>
+      <li><strong>Software</strong> — The first software layer is a network of scripts, each built around one simple component at a time — starting with a local voice-to-text system.</li>
+      <li><strong>Prototype 1</strong> — Combine the software and the hardware into a first working prototype.</li>
+    </ol>
+    <p>
+      Each iteration was proven in SITL before I trusted it enough to move toward real hardware — logic that looks clean in simulation doesn't always survive real radios, real latency, and real timing.
+    </p>
+  </section>
+
+  <!-- ============================================================
+       4. PROOF OF CONCEPT — recordings, each with a description underneath.
+
+       To add a recording:
+         1. Drop the video file (.mp4 works best for browser compatibility)
+            into assets/projects/<your-project>/ and point the <source src>
+            at it, or duplicate the whole <div class="poc-item"> block below.
+         2. If a video is large (phone recordings can easily be 100s of MB),
+            GitHub isn't a great place for it — upload it to YouTube (can be
+            "Unlisted" so it's not publicly searchable) and swap the <video>
+            block for an <iframe> instead, e.g.:
+              <div class="poc-video">
+                <iframe src="https://www.youtube.com/embed/YOUR-VIDEO-ID" allowfullscreen></iframe>
+              </div>
+       ============================================================ -->
+  <section class="project-section" id="poc">
+    <div class="section-label">04 · Proof of Concept</div>
+    <h2>Proof of Concept</h2>
+    <p>
+      Recordings from testing and simulation, demonstrating the system working end to end.
+    </p>
+
+    <div class="poc-list">
+
+      <!-- Example recording — replace the src with your own file -->
+      <div class="poc-item">
+        <div class="poc-video">
+          <video controls preload="metadata">
+            <source src="../assets/projects/drone/poc-01.mp4" type="video/mp4">
+            Your browser doesn't support embedded video —
+            <a href="../assets/projects/drone/poc-01.mp4">download it here</a> instead.
+          </video>
+        </div>
+        <p class="poc-desc"><strong>Two-drone voice command, SITL.</strong> First end-to-end run of the voice interface commanding two simulated drones through Mission Planner — describes what's happening, when it broke, and what it proves.</p>
+      </div>
+
+      <!-- To add another recording, duplicate the .poc-item block above
+           (right down to the closing </div>) and paste it here. -->
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       5. ENGINEERING LOG — dated, chronological, key decisions + reasoning
+       ============================================================ -->
+  <section class="project-section" id="log">
+    <div class="section-label">05 · Engineering Log</div>
+    <h2>Engineering Log</h2>
+
+    <div class="timeline">
+      <div class="timeline-entry">
+        <div class="timeline-date">2026-04-02</div>
+        <h4>Concept & scoping — from weaponized vehicle to command system.</h4>
+        <p>
+          The project began as a weaponized RC-plane concept and evolved, through iteration, into its real thesis: a single-operator system for commanding multiple drones. I recognized that the valuable, industry-relevant problem wasn't any individual vehicle but the command-and-control layer — and scoped the project to build that core first rather than chasing exotic hardware.
+        </p>
+      </div>
+
+      <div class="timeline-entry">
+        <div class="timeline-date">2026-04-09</div>
+        <h4>Hardware architecture & validation.</h4>
+        <p>
+          Specified a 5-inch, 6S ArduPilot quadcopter and validated every critical component — most importantly verifying the flight controller against ArduPilot's own firmware server rather than trusting vendor "compatibility" claims. Designed the power system, radio links (separate control and telemetry channels), and a custom 3D-printed mount consolidating the GPS, telemetry radio, and receiver.
+        </p>
+      </div>
+
+      <div class="timeline-entry">
+        <div class="timeline-date">2026-04-21</div>
+        <h4>Command spine — from simulation to code-controlled flight.</h4>
+        <p>
+          Stood up an ArduPilot software-in-the-loop (SITL) environment and built a Python/pymavlink command toolkit: connect, arm, takeoff, navigate-to-point, and land — each verified by reading the drone's telemetry back rather than assuming commands succeeded. Structured as a reusable library so every higher layer builds on the same foundation.
+        </p>
+      </div>
+
+      <div class="timeline-entry">
+        <div class="timeline-date">2026-05-03</div>
+        <h4>Voice control & multi-drone routing.</h4>
+        <p>
+          Added an offline voice-command pipeline (local speech recognition + a deterministic two-stage parser: identify the target drone, then the action), enabling spoken commands routed to a specific drone — "Alpha, take off" versus "Bravo, take off." Chose offline/deterministic over a cloud model for reliability and field-deployability.
+        </p>
+      </div>
+
+      <div class="timeline-entry">
+        <div class="timeline-date">2026-05-12</div>
+        <h4>Leader-follower teaming.</h4>
+        <p>
+          Implemented autonomous following, where the ground station relays a leader drone's position to a follower in real time, achieving stable formation tracking. Logged follow performance to analyze and tune tracking behavior — demonstrating closed-loop measurement, not just a working demo.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       6. SKILLS & TAGS — competencies this project demonstrates
+       ============================================================ -->
+  <section class="project-section" id="skills">
+    <div class="section-label">06 · Skills &amp; Tags</div>
+    <h2>Skills &amp; Tags</h2>
+    <div class="skills-list">
+      <span class="tag">SolidWorks</span>
+      <span class="tag">UAS/UAV</span>
+      <span class="tag">MAVLINK/pymavlink</span>
+      <span class="tag">3D Printing (FDM)</span>
+      <span class="tag">Python</span>
+      <span class="tag">Human-Machine Interference (HMI)</span>
+      <span class="tag">Control Systems</span>
+      <span class="tag">multi-drone teaming</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       7. PHOTO GALLERY — build/progress photos specific to this project
+       (kept as the last section on the page)
+       ============================================================ -->
+  <section class="project-section" id="gallery">
+    <div class="section-label">07 · Photo Gallery</div>
+    <h2>Photo Gallery</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="../assets/projects/drone/DSC01422.JPG" alt="Concept sketch" loading="lazy">
+        <div class="cap">Both drones fully assembled. Next step: calibration.</div>
+      </div>
+      <div class="gallery-item">
+        <img src="../assets/projects/drone/DSC01415.JPG" alt="FEA mesh on the arm" loading="lazy">
+        <div class="cap">Frame assembly with motors and components connected to the flight controller.</div>
+      </div>
+      <div class="gallery-item">
+        <img src="../assets/projects/drone/DSC01390.JPG" alt="First printed v1 arm" loading="lazy">
+        <div class="cap">3-in-1 3D-printed custom standoff assembly</div>
+      </div>
+      <div class="gallery-item">
+        <img src="../assets/projects/drone/DSC01392.JPG" alt="Drop test rig" loading="lazy">
+        <div class="cap">The standoff to the right came with the drone; I took some inspiration from it and created my own custom one to the left.</div>
+      </div>
+      <div class="gallery-item">
+        <img src="../assets/projects/drone/DSC01407.JPG" alt="Final assembled quad" loading="lazy">
+        <div class="cap">Bare-bones frame with motors and ESC attached.</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>© <span data-year></span> Misael Vargas. Built with plain HTML/CSS/JS, hosted on GitHub Pages.</div>
+    <div><a href="../index.html">&larr; All projects</a></div>
+  </div>
+</footer>
+
+<!-- Lightbox for the Photo Gallery section above — js/main.js wires this up
+     automatically for any .gallery-item on the page, no edits needed here. -->
+<div class="lightbox" data-lightbox>
+  <button class="lb-close" aria-label="Close">&times;</button>
+  <button class="lb-nav lb-prev" aria-label="Previous">&#8249;</button>
+  <div>
+    <img src="" alt="">
+    <div class="lb-cap"></div>
+  </div>
+  <button class="lb-nav lb-next" aria-label="Next">&#8250;</button>
+</div>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

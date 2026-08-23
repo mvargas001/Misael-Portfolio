@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Name — Engineering Portfolio</title>
+<meta name="description" content="Engineering portfolio: projects, CAD models, build logs, and photos.">
+<script>
+  // Set theme before first paint to avoid a flash of the wrong theme.
+  (function () {
+    var saved = null;
+    try { saved = localStorage.getItem("theme"); } catch (e) {}
+    var theme = saved || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    document.documentElement.setAttribute("data-theme", theme);
+  })();
+</script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a href="index.html" class="brand"><span class="dot">&#9679;</span> Personal Portfolio</a>
+    <button class="theme-toggle" data-theme-toggle aria-label="Toggle dark mode">
+      <span class="icon-sun">&#9728;</span><span class="icon-moon">&#9789;</span>
+    </button>
+  </div>
+</nav>
+
+<!-- Short header: name, tagline, brief intro. Keep this short — the grid
+     below is what people actually scan. Edit these in js/data.js (SITE). -->
+<header class="landing-header">
+  <div class="wrap">
+    <h1><span data-site-name>Your Name</span></h1>
+    <p class="tagline" data-site-tagline>Mechanical Engineering Student</p>
+    <p class="intro" data-site-intro>Brief intro goes here.</p>
+    <div class="header-links">
+      <a href="#" data-site-resume target="_blank">Resume</a>
+      <a href="#" data-site-github target="_blank">GitHub</a>
+      <a href="#" data-site-linkedin target="_blank">LinkedIn</a>
+      <a href="#" data-site-email>Email</a>
+    </div>
+  </div>
+</header>
+
+<!-- Project grid: cards only, no long text. Each card links straight to
+     that project's own page. Populated from js/data.js (PROJECTS). -->
+<section>
+  <div class="wrap">
+    <div class="grid" data-projects-grid></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>© <span data-year></span> <span data-site-name>Your Name</span>. Built with plain HTML/CSS/JS, hosted on GitHub Pages.</div>
+    <div><a href="#" data-site-github target="_blank">GitHub</a> · <a href="#" data-site-linkedin target="_blank">LinkedIn</a></div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
