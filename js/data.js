@@ -11,7 +11,7 @@
 const SITE = {
   name: "Misael Vargas",
   tagline: "Mechanical Engineering Student",
-  intro: "I design and build things — mostly mechatronics and rapid prototyping. This site collects my coursework projects and personal builds, from first sketch through CAD, fabrication, and testing.",
+  intro: "I am driven by a hunger for human advancement and technical rigor. This portfolio showcases my hands-on engineering builds, highlighting full-lifecycle design across mechanical CAD, systems architecture, and UAV hardware integration.",
   email: "Misaelvgas875@gmail.com",
   github: "https://github.com/mvargas001",
   linkedin: "https://www.linkedin.com/in/misael-vargas-882817352",
