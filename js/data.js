@@ -13,7 +13,7 @@ const SITE = {
   tagline: "Mechanical Engineering Student",
   intro: "I am driven by a hunger for human advancement and technical rigor. This portfolio showcases my hands-on engineering builds, highlighting full-lifecycle design across mechanical CAD, systems architecture, and UAV hardware integration.",
   email: "Misaelvgas875@gmail.com",
-  github: "https://github.com/mvargas001",
+  github: "N/A",
   linkedin: "https://www.linkedin.com/in/misael-vargas-882817352",
   resumeUrl: "assets/resume.pdf"
 };
