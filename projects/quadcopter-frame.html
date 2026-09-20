@@ -164,7 +164,7 @@
 
     <div class="timeline">
       <div class="timeline-entry">
-        <div class="timeline-date">2026-04-02</div>
+        <div class="timeline-date">06-02-2026</div>
         <h4>Concept & scoping — from weaponized vehicle to command system.</h4>
         <p>
           The project began as a weaponized RC-plane concept and evolved, through iteration, into its real thesis: a single-operator system for commanding multiple drones. I recognized that the valuable, industry-relevant problem wasn't any individual vehicle but the command-and-control layer — and scoped the project to build that core first rather than chasing exotic hardware.
@@ -172,7 +172,7 @@
       </div>
 
       <div class="timeline-entry">
-        <div class="timeline-date">2026-04-09</div>
+        <div class="timeline-date">06-04-2026</div>
         <h4>Hardware architecture & validation.</h4>
         <p>
           Specified a 5-inch, 6S ArduPilot quadcopter and validated every critical component — most importantly verifying the flight controller against ArduPilot's own firmware server rather than trusting vendor "compatibility" claims. Designed the power system, radio links (separate control and telemetry channels), and a custom 3D-printed mount consolidating the GPS, telemetry radio, and receiver.
@@ -180,7 +180,7 @@
       </div>
 
       <div class="timeline-entry">
-        <div class="timeline-date">2026-04-21</div>
+        <div class="timeline-date">06-21-2026</div>
         <h4>Command spine — from simulation to code-controlled flight.</h4>
         <p>
           Stood up an ArduPilot software-in-the-loop (SITL) environment and built a Python/pymavlink command toolkit: connect, arm, takeoff, navigate-to-point, and land — each verified by reading the drone's telemetry back rather than assuming commands succeeded. Structured as a reusable library so every higher layer builds on the same foundation.
@@ -188,7 +188,7 @@
       </div>
 
       <div class="timeline-entry">
-        <div class="timeline-date">2026-05-03</div>
+        <div class="timeline-date">07-03-2026</div>
         <h4>Voice control & multi-drone routing.</h4>
         <p>
           Added an offline voice-command pipeline (local speech recognition + a deterministic two-stage parser: identify the target drone, then the action), enabling spoken commands routed to a specific drone — "Alpha, take off" versus "Bravo, take off." Chose offline/deterministic over a cloud model for reliability and field-deployability.
@@ -196,7 +196,7 @@
       </div>
 
       <div class="timeline-entry">
-        <div class="timeline-date">2026-05-12</div>
+        <div class="timeline-date">07-12-2026</div>
         <h4>Leader-follower teaming.</h4>
         <p>
           Implemented autonomous following, where the ground station relays a leader drone's position to a follower in real time, achieving stable formation tracking. Logged follow performance to analyze and tune tracking behavior — demonstrating closed-loop measurement, not just a working demo.
