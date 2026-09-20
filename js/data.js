@@ -15,7 +15,7 @@ const SITE = {
   email: "Misaelvgas875@gmail.com",
   github: "N/A",
   linkedin: "https://www.linkedin.com/in/misael-vargas-882817352",
-  resumeUrl: "assets/resume.pdf"
+  resumeUrl: "assets/portfolio/Misael_vargas_portfolio_1.pdf"
 };
 
 // ---------------------------------------------------------------
