@@ -13,7 +13,7 @@ const SITE = {
   tagline: "Mechanical Engineering Student",
   intro: "I am driven by a hunger for human advancement and technical rigor. This portfolio showcases my hands-on engineering builds, highlighting full-lifecycle design across mechanical CAD, systems architecture, and UAV hardware integration.",
   email: "Misaelvgas875@gmail.com",
-  github: "N/A",
+  github: "https://github.com/mvargas001",
   linkedin: "https://www.linkedin.com/in/misael-vargas-882817352",
   resumeUrl: "assets/portfolio/Misael_vargas_portfolio_1.pdf"
 };
@@ -29,11 +29,11 @@ const SITE = {
 // ---------------------------------------------------------------
 const PROJECTS = [
   {
-    id: "your-next-project",
+    id: "decurion",
     title: "Decurion",
     oneLiner: "One operator commanding multiple autonomous UAVs — that's the objective of Project Decurion.",
     heroImage: "assets/projects/drone/DSC01419.JPG",
-    tags: ["SolidWorks", "FEA", "3D Printing"],
+    tags: ["SolidWorks", "Python", "3D Printing"],
     href: "projects/quadcopter-frame.html"
   }
 
