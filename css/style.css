@@ -505,3 +505,177 @@ footer a:hover { color: var(--accent); }
 @media (max-width: 760px) {
   .project-section { scroll-margin-top: 168px; }
 }
+
+/* ==========================================================================
+   PROJECT PAGE v2 — header facts, milestones, progress cards, case study, CAD
+   ========================================================================== */
+
+/* status badge under the project title */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--text);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+.status-badge .pulse {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 0 rgba(34,197,94,.6);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(34,197,94,.5); }
+  70% { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
+  100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+}
+@media (prefers-reduced-motion: reduce) { .status-badge .pulse { animation: none; } }
+
+/* key facts strip */
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin: 4px 0 16px;
+}
+.fact { background: var(--surface); padding: 12px 14px; display: flex; flex-direction: column; gap: 3px; }
+.fact-label { font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: .08em; color: var(--text-dim); }
+.fact-value { font-size: 0.9rem; line-height: 1.4; }
+
+/* latest update callout */
+.latest-update {
+  display: grid;
+  grid-template-columns: auto auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0 8px;
+  padding: 12px 16px;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border));
+  background: color-mix(in srgb, var(--accent) 6%, var(--surface));
+  border-radius: var(--radius);
+  color: var(--text);
+}
+.latest-update:hover { text-decoration: none; border-color: var(--accent); }
+.latest-label { font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); white-space: nowrap; }
+.latest-date { font-family: var(--mono); font-size: 0.78rem; color: var(--accent-2); white-space: nowrap; }
+.latest-text { font-size: 0.92rem; }
+.latest-arrow { color: var(--accent); }
+@media (max-width: 640px) {
+  .latest-update { grid-template-columns: 1fr auto; }
+  .latest-text { grid-column: 1 / -1; }
+  .latest-arrow { display: none; }
+}
+
+/* generic helpers */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+@media (max-width: 760px) { .two-col { grid-template-columns: 1fr; gap: 8px; } }
+.mini-head { font-size: 1rem; margin: 0 0 10px; }
+.project-section .cad-grid + .mini-head { margin-top: 32px; }
+.muted { color: var(--text-dim); font-size: 0.92rem; }
+.steps li { margin-bottom: 8px; }
+
+/* placeholder slots for photos / models you haven't added yet */
+.media-placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 16px;
+  border: 1.5px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  color: var(--text-dim);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+}
+.media-placeholder.tall { min-height: 300px; height: auto; }
+.todo-inline { color: var(--accent-2); font-style: italic; }
+
+/* milestones checklist */
+.milestones { list-style: none; padding: 0; margin: 8px 0 0; display: flex; flex-direction: column; gap: 14px; }
+.milestone {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 14px 18px;
+}
+.ms-head { display: flex; align-items: center; gap: 12px; }
+.ms-head h3 { margin: 0; font-size: 1rem; flex: 1; }
+.ms-icon {
+  flex: none;
+  width: 22px; height: 22px; border-radius: 50%;
+  border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 700;
+}
+.ms-state { font-family: var(--mono); font-size: 0.72rem; color: var(--text-dim); white-space: nowrap; }
+.ms-body { margin-top: 14px; padding-left: 34px; }
+.milestone.done .ms-icon { background: #22c55e; border-color: #22c55e; color: #fff; }
+.milestone.done .ms-icon::after { content: "\2713"; }
+.milestone.done .ms-state { color: #16a34a; }
+.milestone.active { border-color: color-mix(in srgb, var(--accent) 40%, var(--border)); }
+.milestone.active .ms-icon { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 20%, transparent); }
+.milestone.active .ms-state { color: var(--accent); }
+.milestone.todo { background: transparent; }
+.milestone.todo h3 { color: var(--text-dim); font-weight: 500; }
+@media (max-width: 640px) { .ms-body { padding-left: 0; } }
+
+/* metric tiles */
+.metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 14px; }
+.metric { background: var(--surface-2); border-radius: 8px; padding: 10px 14px; display: flex; flex-direction: column; }
+.metric-value { font-size: 1.4rem; font-weight: 700; line-height: 1.2; }
+.metric-label { font-size: 0.78rem; color: var(--text-dim); }
+
+/* debugging case study card */
+.case-study {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 20px;
+  background: var(--surface-2);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+.case-media img { width: 100%; border-radius: 8px; border: 1px solid var(--border); }
+.case-kicker { font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: .08em; color: var(--accent-2); }
+.case-text h4 { margin: 4px 0 10px; font-size: 1.05rem; }
+.case-text dl { margin: 0; }
+.case-text dt { font-weight: 600; font-size: 0.85rem; margin-top: 8px; }
+.case-text dd { margin: 2px 0 0; color: var(--text-dim); font-size: 0.88rem; }
+@media (max-width: 760px) { .case-study { grid-template-columns: 1fr; } }
+
+/* progress cards (visual engineering log) */
+.progress-list { display: flex; flex-direction: column; gap: 16px; }
+.progress-card {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 18px;
+  align-items: start;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: 14px;
+}
+.progress-card.no-media { grid-template-columns: 1fr; }
+.progress-media { aspect-ratio: 4 / 3; border-radius: 8px; overflow: hidden; }
+.progress-media img { width: 100%; height: 100%; object-fit: cover; }
+.progress-media .media-placeholder { min-height: 0; }
+.progress-text h4 { margin: 2px 0 6px; font-size: 1.02rem; }
+.progress-text p { margin: 0; color: var(--text-dim); font-size: 0.92rem; }
+@media (max-width: 640px) { .progress-card { grid-template-columns: 1fr; } }
+
+/* CAD / 3D model grid */
+.cad-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.cad-item model-viewer { height: 300px; margin: 0; }
