@@ -45,7 +45,6 @@
     <p class="subtitle">A solo student build exploring how one operator can command multiple autonomous UAVs — bridging human control and machine autonomy.</p>
     <div class="tags">
       <span class="tag">SolidWorks</span>
-      <span class="tag">FEA</span>
       <span class="tag">3D Printing</span>
       <span class="tag">Python</span>
       <span class="tag">Control Systems</span>
@@ -75,14 +74,13 @@
     <div class="section-label">01 · Overview</div>
     <h2>Overview</h2>
     <div class="hero-image">
-      <img src="../assets/projects/drone/DSC01422.JPG" alt="Quadcopter frame render">
+      <img src="../assets/projects/drone/DSC01422.JPG" alt="Both Decurion quadcopters assembled on the workbench">
     </div>
     <p>
       Decurion is a manned-unmanned teaming system in active development. The simulation side, built in ArduPilot SITL and running through Mission Planner, is largely working: I can currently command two drones by voice in simulation. The physical build is underway, with the first and second drone nearing completion.
-
     </p>
     <p>
-      Both drones can be pictured above. 
+      Both drones are pictured above.
     </p>
   </section>
 
@@ -148,20 +146,18 @@
         <div class="poc-video">
           <iframe src="https://www.youtube.com/embed/oYKK2LCJxHQ?si=MxL-YYWiSNarkgfj" title="Decurion: ArduPilot SITL Swarm Demo" allowfullscreen></iframe>
         </div>
-        <p class="poc-desc"><strong>Decurion: ArduPilot SITL Swarm Demo, SITL.</strong> First end-to-end run of the voice interface commanding two simulated drones through Mission Planner — describes what's happening and what it proves.</p>
+        <p class="poc-desc"><strong>Decurion: ArduPilot SITL Swarm Demo, SITL.</strong> First end-to-end run of the voice interface commanding two simulated drones through Mission Planner. Each spoken command is parsed offline, routed to the right drone (Alpha or Bravo), and confirmed by reading its telemetry back.</p>
       </div>
 
       <!-- ITEM 2: Your New Flight Data Image -->
       <div class="poc-item">
         <!-- The style tag below makes sure the image fits nicely on the screen -->
-        <img src="../assets/portfolio/LOGDATA1UNFILTERED.jpg" alt="Flight data showing next steps" style="width: 100%; border-radius: 8px;">
+        <img src="../assets/portfolio/LOGDATA1UNFILTERED.jpg" alt="Flight log graph of altitude data during the Loiter-mode runaway climb" style="width: 100%; border-radius: 8px;">
         
-        <p class="poc-desc"><strong>Diagnosing a critical failure in Loiter mode that caused erratic climbing and ignored throttle inputs:</strong> 
-
-The graph reveals the flight controller's altitude input (green) severely overshot the commanded altitude (red) due to a massive spike in the raw barometer reading (orange). ArduPilot's EKF-fused estimate (yellow) failed to filter this anomaly, corrupting the controller's altitude perception and triggering the runaway climb.
-
-Root Cause: Turbulent prop wash disrupting the unshielded barometer.
-Solution: Mounted open-cell foam over the sensor to block direct airflow while maintaining ambient pressure equalization. </p>
+        <p class="poc-desc"><strong>Diagnosing a critical failure in Loiter mode that caused erratic climbing and ignored throttle inputs.</strong></p>
+        <p class="poc-desc"><strong>What the graph shows:</strong> The flight controller's altitude input (green) severely overshot the commanded altitude (red) due to a massive spike in the raw barometer reading (orange). ArduPilot's EKF-fused estimate (yellow) failed to filter this anomaly, corrupting the controller's altitude perception and triggering the runaway climb.</p>
+        <p class="poc-desc"><strong>Root cause:</strong> Turbulent prop wash disrupting the unshielded barometer.</p>
+        <p class="poc-desc"><strong>Solution:</strong> Mounted open-cell foam over the sensor to block direct airflow while maintaining ambient pressure equalization.</p>
       </div>
 
     </div>
@@ -229,9 +225,9 @@ Solution: Mounted open-cell foam over the sensor to block direct airflow while m
       <span class="tag">MAVLINK/pymavlink</span>
       <span class="tag">3D Printing (FDM)</span>
       <span class="tag">Python</span>
-      <span class="tag">Human-Machine Interference (HMI)</span>
+      <span class="tag">Human-Machine Interface (HMI)</span>
       <span class="tag">Control Systems</span>
-      <span class="tag">multi-drone teaming</span>
+      <span class="tag">Multi-Drone Teaming</span>
     </div>
   </section>
 
@@ -244,23 +240,23 @@ Solution: Mounted open-cell foam over the sensor to block direct airflow while m
     <h2>Photo Gallery</h2>
     <div class="gallery-grid">
       <div class="gallery-item">
-        <img src="../assets/projects/drone/DSC01422.JPG" alt="Concept sketch" loading="lazy">
+        <img src="../assets/projects/drone/DSC01422.JPG" alt="Both drones fully assembled" loading="lazy">
         <div class="cap">Both drones fully assembled. Next step: calibration.</div>
       </div>
       <div class="gallery-item">
-        <img src="../assets/projects/drone/DSC01415.JPG" alt="FEA mesh on the arm" loading="lazy">
+        <img src="../assets/projects/drone/DSC01415.JPG" alt="Frame with motors and components wired to the flight controller" loading="lazy">
         <div class="cap">Frame assembly with motors and components connected to the flight controller.</div>
       </div>
       <div class="gallery-item">
-        <img src="../assets/projects/drone/DSC01390.JPG" alt="First printed v1 arm" loading="lazy">
+        <img src="../assets/projects/drone/DSC01390.JPG" alt="Custom 3-in-1 3D-printed standoff assembly" loading="lazy">
         <div class="cap">3-in-1 3D-printed custom standoff assembly</div>
       </div>
       <div class="gallery-item">
-        <img src="../assets/projects/drone/DSC01392.JPG" alt="Drop test rig" loading="lazy">
+        <img src="../assets/projects/drone/DSC01392.JPG" alt="Stock standoff next to the custom 3D-printed standoff" loading="lazy">
         <div class="cap">The standoff to the right came with the drone; I took some inspiration from it and created my own custom one to the left.</div>
       </div>
       <div class="gallery-item">
-        <img src="../assets/projects/drone/DSC01407.JPG" alt="Final assembled quad" loading="lazy">
+        <img src="../assets/projects/drone/DSC01407.JPG" alt="Bare frame with motors and ESC attached" loading="lazy">
         <div class="cap">Bare-bones frame with motors and ESC attached.</div>
       </div>
     </div>
