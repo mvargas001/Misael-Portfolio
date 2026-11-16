@@ -705,8 +705,10 @@ footer a:hover { color: var(--accent); }
 @media (max-width: 640px) { .progress-card { grid-template-columns: 1fr; } }
 
 /* CAD / 3D model grid */
-.cad-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.cad-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr)); gap: 16px; }
 .cad-item model-viewer { height: 300px; margin: 0; }
+.cad-item.wide { grid-column: 1 / -1; }
+.cad-item.wide model-viewer { height: 440px; }
 
 /* ---------- Progress cards: click to enlarge ---------- */
 .progress-card.expandable { cursor: pointer; position: relative; transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease; }
