@@ -133,6 +133,113 @@ function initSectionNav() {
 }
 
 // ---------------------------------------------------------------
+// Project pages: click a Progress card to open it enlarged
+// (bigger photo + full text). Arrow keys / buttons move between
+// cards, Esc or clicking the dark background closes it.
+// Works automatically for any .progress-card on the page.
+// ---------------------------------------------------------------
+function initProgressModal() {
+  const cards = Array.from(document.querySelectorAll(".progress-card"));
+  if (!cards.length) return;
+
+  const modal = document.createElement("div");
+  modal.className = "progress-modal";
+  modal.setAttribute("role", "dialog");
+  modal.setAttribute("aria-modal", "true");
+  modal.innerHTML = `
+    <div class="pm-panel">
+      <button class="pm-close" aria-label="Close">&times;</button>
+      <div class="pm-media"></div>
+      <div class="pm-body">
+        <div class="timeline-date pm-date"></div>
+        <h3 class="pm-title"></h3>
+        <div class="pm-text"></div>
+        <div class="pm-nav">
+          <button class="pm-prev" aria-label="Previous update">&larr; Newer</button>
+          <span class="pm-count"></span>
+          <button class="pm-next" aria-label="Next update">Older &rarr;</button>
+        </div>
+      </div>
+    </div>`;
+  document.body.appendChild(modal);
+
+  const media = modal.querySelector(".pm-media");
+  const date = modal.querySelector(".pm-date");
+  const title = modal.querySelector(".pm-title");
+  const text = modal.querySelector(".pm-text");
+  const count = modal.querySelector(".pm-count");
+  let index = 0;
+  let lastFocus = null;
+
+  function show(i) {
+    index = (i + cards.length) % cards.length;
+    const card = cards[index];
+    const img = card.querySelector(".progress-media img");
+    media.innerHTML = "";
+    if (img) {
+      const big = document.createElement("img");
+      big.src = img.src;
+      big.alt = img.alt || "";
+      media.appendChild(big);
+      modal.classList.remove("no-media");
+    } else {
+      modal.classList.add("no-media");
+    }
+    const d = card.querySelector(".timeline-date");
+    const h = card.querySelector("h4");
+    const p = card.querySelector(".progress-text p");
+    date.textContent = d ? d.textContent : "";
+    title.textContent = h ? h.textContent : "";
+    text.innerHTML = p ? p.innerHTML : "";
+    count.textContent = (index + 1) + " / " + cards.length;
+  }
+
+  function open(i) {
+    lastFocus = document.activeElement;
+    show(i);
+    modal.classList.add("open");
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", onKey);
+    modal.querySelector(".pm-close").focus();
+  }
+
+  function close() {
+    modal.classList.remove("open");
+    document.body.style.overflow = "";
+    document.removeEventListener("keydown", onKey);
+    if (lastFocus) lastFocus.focus();
+  }
+
+  function onKey(e) {
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowLeft") show(index - 1);
+    if (e.key === "ArrowRight") show(index + 1);
+  }
+
+  cards.forEach((card, i) => {
+    card.classList.add("expandable");
+    card.setAttribute("tabindex", "0");
+    card.setAttribute("role", "button");
+    card.setAttribute("aria-label", "Open update: " + (card.querySelector("h4")?.textContent || ""));
+    card.addEventListener("click", (e) => {
+      if (e.target.closest("a")) return; // let links inside the card work normally
+      open(i);
+    });
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(i); }
+    });
+  });
+
+  modal.querySelector(".pm-close").addEventListener("click", close);
+  modal.querySelector(".pm-prev").addEventListener("click", () => show(index - 1));
+  modal.querySelector(".pm-next").addEventListener("click", () => show(index + 1));
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) close();
+    if (e.target.closest(".pm-text a")) close(); // jumping to another section closes the modal
+  });
+}
+
+// ---------------------------------------------------------------
 // Init
 // ---------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", () => {
@@ -140,6 +247,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderLanding();
   initGalleryLightbox();
   initSectionNav();
+  initProgressModal();
 
   const year = document.querySelector("[data-year]");
   if (year) year.textContent = new Date().getFullYear();
