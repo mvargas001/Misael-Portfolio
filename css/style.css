@@ -679,3 +679,79 @@ footer a:hover { color: var(--accent); }
 /* CAD / 3D model grid */
 .cad-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
 .cad-item model-viewer { height: 300px; margin: 0; }
+
+/* ---------- Progress cards: click to enlarge ---------- */
+.progress-card.expandable { cursor: pointer; position: relative; transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease; }
+.progress-card.expandable:hover,
+.progress-card.expandable:focus-visible {
+  border-color: var(--accent-dim);
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--accent) 12%, transparent);
+  outline: none;
+}
+.progress-card.expandable::after {
+  content: "\2922"; /* expand arrows */
+  position: absolute;
+  top: 10px; right: 12px;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  opacity: .5;
+  transition: opacity .15s ease, color .15s ease;
+}
+.progress-card.expandable:hover::after,
+.progress-card.expandable:focus-visible::after { opacity: 1; color: var(--accent); }
+.progress-card.expandable:hover .progress-media img { transform: scale(1.04); }
+.progress-media img { transition: transform .2s ease; }
+
+.progress-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 210;
+  background: rgba(6,8,12,0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.progress-modal.open { display: flex; }
+.pm-panel {
+  position: relative;
+  width: min(1000px, 100%);
+  max-height: calc(100vh - 48px);
+  overflow: auto;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  box-shadow: 0 20px 60px rgba(0,0,0,.4);
+}
+.progress-modal.no-media .pm-panel { grid-template-columns: 1fr; width: min(640px, 100%); }
+.progress-modal.no-media .pm-media { display: none; }
+.pm-media { background: #000; display: flex; align-items: center; justify-content: center; min-height: 320px; }
+.pm-media img { width: 100%; height: 100%; max-height: calc(100vh - 48px); object-fit: contain; }
+.pm-body { padding: 28px 26px 22px; display: flex; flex-direction: column; }
+.pm-title { margin: 4px 0 12px; font-size: 1.3rem; padding-right: 28px; }
+.pm-text { color: var(--text-dim); font-size: 1rem; line-height: 1.65; flex: 1; }
+.pm-nav { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 24px; padding-top: 14px; border-top: 1px solid var(--border); }
+.pm-nav button {
+  font-family: var(--mono); font-size: 0.78rem;
+  background: var(--surface-2); color: var(--text);
+  border: 1px solid var(--border); border-radius: 6px;
+  padding: 6px 12px; cursor: pointer;
+}
+.pm-nav button:hover { border-color: var(--accent-dim); color: var(--accent); }
+.pm-count { font-family: var(--mono); font-size: 0.75rem; color: var(--text-dim); }
+.pm-close {
+  position: absolute; top: 10px; right: 12px; z-index: 2;
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid var(--border); background: var(--surface);
+  color: var(--text); font-size: 1.3rem; line-height: 1; cursor: pointer;
+}
+.pm-close:hover { color: var(--accent); border-color: var(--accent-dim); }
+@media (max-width: 760px) {
+  .progress-modal { padding: 12px; align-items: flex-start; }
+  .pm-panel { grid-template-columns: 1fr; max-height: calc(100vh - 24px); }
+  .pm-media { min-height: 0; }
+  .pm-media img { max-height: 55vh; }
+}
