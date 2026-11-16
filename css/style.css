@@ -396,6 +396,34 @@ model-viewer {
   margin: 16px 0;
 }
 
+/* 3D model controls (buttons are added by js/main.js) */
+model-viewer { position: relative; }
+.mv-controls { position: absolute; top: 10px; right: 10px; display: flex; gap: 6px; z-index: 2; }
+.mv-btn {
+  font: 600 0.8rem var(--sans);
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+}
+.mv-btn:hover { border-color: var(--accent-dim); }
+model-viewer.mv-expanded,
+.cad-item model-viewer.mv-expanded {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  margin: 0;
+  border-radius: 0;
+  border: 0;
+  z-index: 1000;
+}
+body.mv-lock { overflow: hidden; }
+
 /* Engineering log — per-project timeline */
 .timeline {
   position: relative;
