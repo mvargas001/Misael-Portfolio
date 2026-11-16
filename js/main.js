@@ -240,6 +240,59 @@ function initProgressModal() {
 }
 
 // ---------------------------------------------------------------
+// 3D models (<model-viewer>): an "Expand" button that opens the model
+// full-screen, a wider zoom range (closer in and further out), and a
+// "Reset view" button. Applies to every <model-viewer> on the page.
+// ---------------------------------------------------------------
+function initModelViewers() {
+  const viewers = document.querySelectorAll("model-viewer");
+  if (!viewers.length) return;
+
+  viewers.forEach((mv) => {
+    const reset = () => {
+      mv.cameraOrbit = mv.getAttribute("camera-orbit") || "auto auto auto";
+      mv.cameraTarget = "auto auto auto";
+      mv.fieldOfView = "auto";
+    };
+
+    // Let users zoom much closer than the default.
+    mv.setAttribute("min-field-of-view", "8deg");
+    mv.addEventListener("load", () => {
+      const d = mv.getDimensions();
+      const size = Math.max(d.x, d.y, d.z); // metres
+      mv.setAttribute("min-camera-orbit", `auto auto ${(size * 0.6).toFixed(4)}m`);
+      mv.setAttribute("max-camera-orbit", `auto auto ${(size * 4).toFixed(4)}m`);
+      // Re-apply the starting view now that the zoom limits allow it.
+      reset();
+      mv.jumpCameraToGoal();
+    });
+
+    const controls = document.createElement("div");
+    controls.className = "mv-controls";
+    controls.innerHTML = `
+      <button type="button" class="mv-btn" data-mv-reset aria-label="Reset view">&#8634; Reset</button>
+      <button type="button" class="mv-btn" data-mv-expand aria-label="Expand 3D model">&#10530; Expand</button>`;
+    mv.appendChild(controls);
+
+    const setExpanded = (on) => {
+      mv.classList.toggle("mv-expanded", on);
+      document.body.classList.toggle("mv-lock", on);
+      const btn = controls.querySelector("[data-mv-expand]");
+      btn.innerHTML = on ? "&times; Close" : "&#10530; Expand";
+      btn.setAttribute("aria-label", on ? "Close full-screen 3D model" : "Expand 3D model");
+      reset();
+    };
+
+    controls.querySelector("[data-mv-reset]").addEventListener("click", reset);
+    controls.querySelector("[data-mv-expand]").addEventListener("click", () =>
+      setExpanded(!mv.classList.contains("mv-expanded")));
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && mv.classList.contains("mv-expanded")) setExpanded(false);
+    });
+  });
+}
+
+// ---------------------------------------------------------------
 // Init
 // ---------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", () => {
@@ -248,6 +301,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initGalleryLightbox();
   initSectionNav();
   initProgressModal();
+  initModelViewers();
 
   const year = document.querySelector("[data-year]");
   if (year) year.textContent = new Date().getFullYear();
