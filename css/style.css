@@ -411,7 +411,8 @@ model-viewer { position: relative; }
 }
 .mv-btn:hover { border-color: var(--accent-dim); }
 model-viewer.mv-expanded,
-.cad-item model-viewer.mv-expanded {
+.cad-item model-viewer.mv-expanded,
+.cad-item.wide model-viewer.mv-expanded {
   position: fixed;
   inset: 0;
   width: 100vw;
